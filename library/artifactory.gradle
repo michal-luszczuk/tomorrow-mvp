@@ -1,0 +1,79 @@
+// maven publishing stuff
+
+group = 'com.propaneapps.tomorrow'
+version = '1.0.0'
+
+def siteUrl = 'https://github.com/michal-luszczuk/tomorrow-mvp'
+def gitUrl = 'https://github.com/michal-luszczuk/tomorrow-mvp.git'
+
+bintray {
+    user = bintray_user
+    key = bintray_api_key
+
+    configurations = ['archives'] //When uploading configuration files
+    pkg {
+        repo = 'android'
+        name = 'com.propaneapps.tomorrow'
+        desc = 'Bintray aar publishing example'
+        websiteUrl = siteUrl
+        issueTrackerUrl = 'https://github.com/michal-luszczuk/tomorrow-mvp/issues'
+        vcsUrl = gitUrl
+        licenses = ['Apache-2.0']
+        labels = ['aar', 'android', 'example']
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name 'Android MVP library with loaders'
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'michal-luszczuk'
+                        name 'Michał Łuszczuk'
+                    }
+                }
+                scm {
+                    connection 'https://github.com/michal-luszczuk/tomorrow-mvp.git'
+                    developerConnection 'https://github.com/michal-luszczuk/tomorrow-mvp.git'
+                    url siteUrl
+
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    options.charSet = 'UTF-8'
+    options.encoding = 'UTF-8'
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+task findConventions << {
+    println project.getConvention()
+}
