@@ -1,14 +1,14 @@
 // maven publishing stuff
 
 group = 'com.propaneapps.tomorrow'
-version = '1.0.0'
+version = '1.0.1'
 
 def siteUrl = 'https://github.com/michal-luszczuk/tomorrow-mvp'
 def gitUrl = 'https://github.com/michal-luszczuk/tomorrow-mvp.git'
 
 bintray {
-    user = bintray_user
-    key = bintray_api_key
+    user = project.hasProperty('bintray_user') ? project.getProperty('bintray_user') : '0'
+    key = project.hasProperty('bintray_api_key') ? project.getProperty('bintray_api_key') : '0'
 
     configurations = ['archives'] //When uploading configuration files
     pkg {

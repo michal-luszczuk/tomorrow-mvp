@@ -16,9 +16,7 @@
 package com.propaneapps.tomorrow.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 
 import com.propaneapps.tomorrow.common.FactoryWithType;
 import com.propaneapps.tomorrow.loader.LoaderBridge;
