@@ -22,7 +22,7 @@ Library to help all of you in MVP pattern with loaders (to retain presenters) im
 
 2. Now you can easily add gradle dependency to your actual module `build.gradle` file 
     ```gradle
-    compile 'com.propaneapps.tomorrow:library:1.0.0'
+    compile 'com.propaneapps.tomorrow:library:1.0.1'
     ```
     
 ## Simple usage
@@ -44,65 +44,65 @@ Just remember that for the first time **presenter** `onCreate` method will be ca
  */
 public class BasePresenter<V> implements Presenter<V> {
 
-    private V view;
-
-    /**
-     * Called when presenter is created.
-     * This will not e called if activity is recreated because of configuration change.
-     *
-     * @param bundle Bundle with saved state. Could be null when presenter is created for the first time.
-     *               It will be filled with state data if presenter is recreated after activity/process kill
-     */
-    @Override
-    public void onCreate(@Nullable Bundle bundle) {
-
-    }
-
-    /**
-     * Called when presenter and it's component (Activity/Fragment) is going to be removed from memory
-     * This is time when state should be saved if we want to handle activity/process kill.
-     * This will not be called if activity is recreated because of configuration change.
-     *
-     * @param bundle Bundle object to which we could save our presenter state
-     */
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle bundle) {
-
-    }
-
-    /**
-     * Called when component Activity is being removed from the memory (it's finishing, i.e. because of back button
-     * press action)
-     */
-    @Override
-    public void onDestroy() {
-
-    }
-
-    /**
-     * Called when view handled by this presenter is available.
-     * It will be called no later than Activity/Fragment onStart() method call.
-     *
-     * @param view Object representing MVP view layer
-     */
-    @Override
-    public void bindView(V view) {
-        this.view = view;
-    }
-
-    /**
-     * Called when view is being unbind from presenter component.
-     * It will be called no later than Activity/Fragment onStop() method call.
-     */
-    @Override
-    public void unbindView() {
-        this.view = null;
-    }
-
-    @Override
-    public V getView() {
-        return view;
-    }
+        private V view;
+    
+        /**
+         * Called when presenter is created.
+         * This will not e called if activity is recreated because of configuration change.
+         *
+         * @param bundle Bundle with saved state. Could be null when presenter is created for the first time.
+         *               It will be filled with state data if presenter is recreated after activity/process kill
+         */
+        @Override
+        public void onCreate(@Nullable Bundle bundle) {
+    
+        }
+    
+        /**
+         * Called when presenter and it's component (Activity/Fragment) is going to be removed from memory
+         * This is time when state should be saved if we want to handle activity/process kill.
+         * This will not be called if activity is recreated because of configuration change.
+         *
+         * @param bundle Bundle object to which we could save our presenter state
+         */
+        @Override
+        public void onSaveInstanceState(@NonNull Bundle bundle) {
+    
+        }
+    
+        /**
+         * Called when component Activity is being removed from the memory (it's finishing, i.e. because of back button
+         * press action)
+         */
+        @Override
+        public void onDestroy() {
+    
+        }
+    
+        /**
+         * Called when view handled by this presenter is available.
+         * It will be called no later than Activity/Fragment onStart() method call.
+         *
+         * @param view Object representing MVP view layer
+         */
+        @Override
+        public void bindView(V view) {
+            this.view = view;
+        }
+    
+        /**
+         * Called when view is being unbind from presenter component.
+         * It will be called no later than Activity/Fragment onStop() method call.
+         */
+        @Override
+        public void unbindView() {
+            this.view = null;
+        }
+    
+        @Override
+        public V getView() {
+            return view;
+        }
 }
   ```
   
